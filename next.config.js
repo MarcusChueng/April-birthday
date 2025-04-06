@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 // set url prefix for the static resource, useful in deploying to the custom domain or cdn
-let assetPrefix = ``
-let basePath = ``
+let assetPrefix = `/web/April-birthday/out`
+let basePath = `/web/April-birthday/out`
 
 const isGithubActions = process.env.GITHUB_ACTIONS || false
 if (isGithubActions) {
@@ -16,8 +16,10 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     unoptimized: true,
-    path: assetPrefix // Ensure images.path matches assetPrefix
-  }
+  },
+  publicRuntimeConfig: {
+    assetPrefix: assetPrefix, // Expose assetPrefix to the client
+  },
 }
 
 module.exports = nextConfig

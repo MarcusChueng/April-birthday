@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react"
 import Image from 'next/image'
 import LSButton from "@/components/common/LSButton"
+import getConfig from 'next/config';
+
+const { publicRuntimeConfig } = getConfig();
+const assetPrefix = publicRuntimeConfig.assetPrefix;
 
 interface Stage2Props {
   onMixWell: () => void
@@ -36,11 +40,11 @@ export default function Stage2({ onMixWell }:Stage2Props) {
     <div className="mix">
       <div className="mix__bowl">
         <Image width={207} height={148}
-          src="/bowl.png" alt="Mix Bowl" />
+          src={`${assetPrefix}/bowl.png`} alt="Mix Bowl" />
       </div>
       <div className="mix__spoon">
         <Image width={25} height={81} className={mixing ? 'mixing' : ''}
-          src="/spoon.png" alt="Mix Spoon" />
+          src={`${assetPrefix}/spoon.png`} alt="Mix Spoon" />
       </div>
     </div>
     {/* <LSButton className="start" onClick={mix}>Click here to mix!</LSButton> */}

@@ -11,6 +11,11 @@ import Stage3 from '@/components/index/Stage3'
 import Stage4 from '@/components/index/Stage4'
 import dayjs from 'dayjs';
 
+import getConfig from 'next/config';
+
+const { publicRuntimeConfig } = getConfig();
+const assetPrefix = publicRuntimeConfig.assetPrefix;
+
 export default function Birthday() {
   const [progress, setProgress] = useState(1)
 
@@ -26,7 +31,7 @@ export default function Birthday() {
   const [seconds, setSeconds] = useState(0)
   useEffect(() => {
     const now = dayjs()
-    const birthday = dayjs('2023-08-24 00:00')
+    const birthday = dayjs('2025-04-11 00:00')
 
     const diff = Math.floor(birthday.diff(now) / 1000)
     setSeconds(diff)
@@ -51,20 +56,20 @@ export default function Birthday() {
         }}/>
       </CSSTransition>
     <div className={seconds > 0 ? 'hidden' : ''}>
-      {/* <audio autoPlay loop ref={audioRef}>
-        <source src="/bgm1.mp3" type="audio/mpeg" />
-      </audio> */}
+      <audio autoPlay loop ref={audioRef}>
+      <source src={`${assetPrefix}/bgm1.mp3`} type="audio/mpeg" />
+      </audio>
 
       <Image width={207} height={148}
-          src="/bowl.png" alt="Mix Bowl" className='hidden'/>
+          src={`${assetPrefix}/bowl.png`} alt="Mix Bowl" className='hidden'/>
       <Image width={25} height={81} className='hidden'
-          src="/spoon.png" alt="Mix Spoon" />
+          src={`${assetPrefix}/spoon.png`} alt="Mix Spoon" />
       <Image width={290} height={282} draggable={false}
-        src="/oven.png" alt="Oven" className='hidden'/>
+        src={`${assetPrefix}/oven.png`} alt="Oven" className='hidden'/>
       <Image width={90} height={70} draggable={false}
-        src="/tin.png" alt="Tin"className='hidden' />
+        src={`${assetPrefix}/tin.png`} alt="Tin"className='hidden' />
       <Image width={10} height={44}
-          src="/candle.png" alt="Candle" className='hidden' />
+          src={`${assetPrefix}/candle.png`} alt="Candle" className='hidden' />
 
 
 

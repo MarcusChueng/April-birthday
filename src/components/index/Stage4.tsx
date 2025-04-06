@@ -5,6 +5,12 @@ import LSButton from '@/components/common/LSButton'
 import { SeasonOption, baseOptions, fillingOptions } from '@/data/index'
 const MAX_BASE_COUNT = 4, MAX_FILLINGS_COUNT = 5
 
+import getConfig from 'next/config';
+
+const { publicRuntimeConfig } = getConfig();
+const assetPrefix = publicRuntimeConfig.assetPrefix;
+
+
 export default function Stage4() {
   const [bases, setBases] = useState<SeasonOption<'base'>[]>([])
   const [fillings, setFillings] = useState<SeasonOption<'filling'>[]>([])
@@ -134,7 +140,7 @@ function Cake({bases, fillings, finished}: CakeProps) {
   return <div className={finished ? 'cake finished' : 'cake'}>
     <div className={finished ? 'candle finished' : 'candle'}>
       <Image width={10} height={44}
-          src="/candle.png" alt="Candle" />
+          src={`${assetPrefix}/candle.png`} alt="Candle" />
       <div className="frame"></div>
     </div>
 
