@@ -31,7 +31,7 @@ export default function Birthday() {
   const [seconds, setSeconds] = useState(0)
   useEffect(() => {
     const now = dayjs()
-    const birthday = dayjs('2025-04-11 00:00')
+    const birthday = dayjs('2025-04-05 00:00')
 
     const diff = Math.floor(birthday.diff(now) / 1000)
     setSeconds(diff)
