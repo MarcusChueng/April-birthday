@@ -51,9 +51,9 @@ export default function Birthday() {
         }}/>
       </CSSTransition>
     <div className={seconds > 0 ? 'hidden' : ''}>
-      <audio autoPlay loop ref={audioRef}>
+      {/* <audio autoPlay loop ref={audioRef}>
         <source src="/bgm1.mp3" type="audio/mpeg" />
-      </audio>
+      </audio> */}
 
       <Image width={207} height={148}
           src="/bowl.png" alt="Mix Bowl" className='hidden'/>

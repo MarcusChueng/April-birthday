@@ -10,20 +10,13 @@ if (isGithubActions) {
   basePath = `/${repo}`
 }
 
-
-
 const nextConfig = {
-  assetPrefix,
-  basePath,
+  assetPrefix: assetPrefix, // Use the dynamic value
+  basePath: basePath,       // Use the dynamic value
   reactStrictMode: true,
   images: {
     unoptimized: true,
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 's3-us-west-2.amazonaws.com'
-      }
-    ]
+    path: assetPrefix // Ensure images.path matches assetPrefix
   }
 }
 
