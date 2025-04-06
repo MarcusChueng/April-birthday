@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import Image from 'next/image'
 import LSButton from "@/components/common/LSButton"
 import getConfig from 'next/config';
@@ -11,15 +11,17 @@ interface Stage2Props {
 }
 export default function Stage2({ onMixWell }:Stage2Props) {
   const [count, setCount] = useState(0) // mix times
-  const [mixing, setMixing] = useState(false)
+  // const [mixing, setMixing] = useState(false)
+  const isMixing = useRef(false)
+  const isMixEnd = useRef(false)
   const MIX_WELL_COUNT = 5
 
   const mix = () => {
-    if(!mixing && count < MIX_WELL_COUNT) {
+    if(!isMixing.current && count < MIX_WELL_COUNT) {
       setCount(count + 1)
-      setMixing(true)
+      isMixing.current = true
       setTimeout(() => {
-        setMixing(false)
+        isMixing.current = false
       }, 500);
     }
   }
@@ -28,8 +30,9 @@ export default function Stage2({ onMixWell }:Stage2Props) {
     console.log('count', count)
     if(count === MIX_WELL_COUNT) { // mix well, call onMixWell func
       setTimeout(() => {
-        onMixWell()
-      }, 500);
+        !isMixEnd.current && onMixWell()
+        isMixEnd.current = true
+      }, 200);
     }
   }, [count, onMixWell])
 
@@ -43,7 +46,7 @@ export default function Stage2({ onMixWell }:Stage2Props) {
           src={`${assetPrefix}/bowl.png`} alt="Mix Bowl" />
       </div>
       <div className="mix__spoon">
-        <Image width={25} height={81} className={mixing ? 'mixing' : ''}
+        <Image width={25} height={81} className={isMixing.current ? 'mixing' : ''}
           src={`${assetPrefix}/spoon.png`} alt="Mix Spoon" />
       </div>
     </div>
