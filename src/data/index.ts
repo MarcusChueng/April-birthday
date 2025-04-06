@@ -18,7 +18,7 @@ export const stagesContent: StageContent[] = [
     // title: 'Mix successful!',
     title: '融合均匀!',
     // description: 'Congratulations, the mixture is perfect! After pouring the mixture into a baking tin, it’s now time to put it in our digital oven for about 3 seconds. That should be enough time for a nice spongy base.',
-    description: '真不错，一点颗粒都看不到! 先去把烤箱预热下，你呢就歇一会儿。哦对了，因为是鼠标点击或者屏幕触摸，所以刚刚说的越大力越快是骗人的。\n下一步，把做好的面糊放入烤箱。',
+    description: '真不错，一点颗粒都看不到! 先去把烤箱预热下。\n下一步，把做好的面糊放入烤箱。',
     btnUrl: '预热好了，放进来'
   },
   {

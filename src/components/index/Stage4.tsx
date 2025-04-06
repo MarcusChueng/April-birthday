@@ -42,7 +42,6 @@ export default function Stage4() {
 
     <div className={finished ? 'hoping finished' : 'hoping'}>
       生日快乐<br />
-      <p>一个人在一座陌生的城市有时候是会感觉心累...<br/> 接下来的日子坏运气都走开，去相信去遇见更多美好的人和事！</p>
     </div>
 
     {

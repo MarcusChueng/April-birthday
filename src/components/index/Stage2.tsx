@@ -16,11 +16,12 @@ export default function Stage2({ onMixWell }:Stage2Props) {
       setMixing(true)
       setTimeout(() => {
         setMixing(false)
-      }, 1000);
+      }, 500);
     }
   }
 
   useEffect(() => {
+    console.log('count', count)
     if(count === MIX_WELL_COUNT) { // mix well, call onMixWell func
       setTimeout(() => {
         onMixWell()
@@ -31,7 +32,7 @@ export default function Stage2({ onMixWell }:Stage2Props) {
   return <div className="birthday__stage stage2">
     <h1>打发搅拌</h1>
     {/* <p>OK, so let’s start by mixing all of our ingredients together in a big mixing bowl. Click the mix button below until the mixture is nice and smooth.</p> */}
-    <p>蛋黄、面粉、牛奶、色拉油、糖等等，都事先准备好，一起放到容器里了。搅拌工作交给你，看到下面那个按钮了吗？一直点点点（力气越大越好），应该很快就可以打散均匀了。</p>
+    <p>蛋黄、面粉、牛奶、色拉油、糖等等，都事先准备好，一起放到容器里了。搅拌工作交给你，看到下面那个按钮了吗？一直点点点，就可以打散均匀了。</p>
     <div className="mix">
       <div className="mix__bowl">
         <Image width={207} height={148}
