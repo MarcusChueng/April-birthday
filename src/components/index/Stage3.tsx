@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import { getEmptyImage } from 'react-dnd-html5-backend';
+import { useDraggable, useDroppable } from '@dnd-kit/core';
 import getConfig from 'next/config';
 
 const { publicRuntimeConfig } = getConfig();
@@ -15,22 +15,40 @@ interface Stage3Props {
 
 export default function Stage3({ onBaseBake }: Stage3Props) {
   const [isHover, setIsHover] = useState(false);
-  const [{ isDragging }, drag, dragPreview] = useDrag(
-    () => ({
-      type: DND_FORMAT,
-      collect: (monitor) => ({
-        isDragging: !!monitor.isDragging(),
-      }),
-    })
-  );
+  // const [{ isDragging }, drag, dragPreview] = useDrag(
+  //   () => ({
+  //     type: DND_FORMAT,
+  //     collect: (monitor) => ({
+  //       isDragging: !!monitor.isDragging(),
+  //     }),
+  //   })
+  // );
 
-  const [{ isOver }, drop] = useDrop(() => ({
-    accept: DND_FORMAT,
-    drop: () => onBaseBake(),
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver(),
-    }),
-  }));
+  // const [{ isOver }, drop] = useDrop(() => ({
+  //   accept: DND_FORMAT,
+  //   drop: () => onBaseBake(),
+  //   collect: (monitor) => ({
+  //     isOver: !!monitor.isOver(),
+  //   }),
+  // }));
+
+  const {isOver, setNodeRef: setDropNodeRef} = useDroppable({
+    id: 'droppable',
+  });
+
+  const {attributes, listeners, setNodeRef, transform} = useDraggable({
+    id: 'draggable',
+  });
+
+  const style = transform ? {
+    transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+  } : undefined;
+  
+  useEffect(() => {
+    if (isOver) {
+      onBaseBake();
+    }
+  }, [isOver]);
 
   return (
     <div className="birthday__stage stage3">
@@ -44,13 +62,14 @@ export default function Stage3({ onBaseBake }: Stage3Props) {
           src={`${assetPrefix}/oven.png`}
           alt="Oven"
         />
-        <div className="over-real" ref={drop}></div>
+        <div className="over-real" ref={setDropNodeRef}></div>
       </div>
-      <div className="tin" ref={drag}>
+      <div className="tin" ref={setNodeRef} style={style} {...listeners} {...attributes}>
         <Image
           width={90}
           height={70}
           draggable={false}
+          {...style}
           src={`${assetPrefix}/tin.png`}
           alt="Tin"
         />
