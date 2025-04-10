@@ -47,7 +47,7 @@ export default function Stage4() {
     {!finished && <LSButton onClick={onAddCandle}>点上蜡烛!</LSButton>}
 
     <div className={finished ? 'hoping finished' : 'hoping'}>
-      生日快乐<br />
+      璇璇姐，生日快乐<br />
     </div>
 
     {
